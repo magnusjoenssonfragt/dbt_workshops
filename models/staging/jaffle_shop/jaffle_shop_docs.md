@@ -11,3 +11,9 @@ One of the following values:
 | returned       | Item has been returned                           |
 
 {% enddocs %}
+
+{% docs jaffle_shop_docs %}
+
+This source is a database containing different tables, pertaining to customers, orders and payments from Jaffle Shop.
+
+{% enddocs %}
