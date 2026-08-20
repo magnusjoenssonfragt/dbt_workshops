@@ -1,0 +1,26 @@
+version: 2
+
+sources:
+  - name: stripe
+    description: Raw payment data ingested from Stripe.
+    database: raw
+    schema: stripe
+    tables:
+      - name: payment
+        description: One row per payment transaction associated with a Jaffle Shop order.
+        columns:
+          - name: id
+            description: Primary key for the payment transaction.
+          - name: orderid
+            description: Foreign key to the Jaffle Shop order associated with the payment.
+          - name: paymentmethod
+            description: Method used to make the payment, such as credit card, coupon, bank transfer, or gift card.
+          - name: status
+            description: Outcome of the payment transaction, such as success or failure.
+          - name: amount
+            description: Payment amount in cents.
+          - name: created
+            description: Date the payment transaction was created.
+          - name: _batched_at
+            description: Timestamp when the source record was loaded into the warehouse.
+  
