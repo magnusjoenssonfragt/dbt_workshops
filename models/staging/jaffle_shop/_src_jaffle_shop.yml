@@ -1,0 +1,47 @@
+version: 2
+
+sources:
+  - name: jaffle_shop
+    description: "{{ doc('jaffle_shop_docs')}}"
+    database: raw
+    schema: jaffle_shop
+    tables:
+      - name: customers
+        description: One row per Jaffle Shop customer.
+        columns:
+          - name: id
+            description: Primary key for the customer.
+            data_tests:
+              - unique
+              - not_null
+          - name: first_name
+            description: Customer's first name as provided to Jaffle Shop.
+          - name: last_name
+            description: Customer's last name as provided to Jaffle Shop.
+        config:
+          freshness: null
+      - name: orders
+        description: One row per order placed with Jaffle Shop.
+        columns:
+          - name: id
+            description: Primary key for the order.
+            data_tests:
+              - unique
+              - not_null
+          - name: user_id
+            description: Foreign key to the customer who placed the order.
+          - name: order_date
+            description: Date the order was placed.
+          - name: status
+            description: Current fulfillment or return status of the order.
+          - name: _etl_loaded_at
+            description: Timestamp when the source record was loaded into the warehouse.
+        config:
+          freshness:
+            warn_after:
+              count: 12
+              period: hour
+            error_after:
+              count: 7
+              period: day
+          loaded_at_field: _etl_loaded_at
