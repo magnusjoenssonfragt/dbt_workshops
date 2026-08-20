@@ -1,5 +1,6 @@
 version: 2
 
+sources:
   - name: jaffle_shop
     description: "{{ doc('jaffle_shop_docs')}}"
     database: raw
